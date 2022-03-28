@@ -1,0 +1,15 @@
+Package: opal
+Title: Retrieve Data From the OpenAlex API Via R
+Version: 0.0.0.9000
+Authors@R: 
+    person("Jacob", "Goldstein-Greenwood", , "jacobgg@virginia.edu", role = c("aut", "cre"),
+           comment = c(GitHub = "jacob-gg"))
+Description: Tools for retrieving and processing data from the OpenAlex API.
+License: Mozilla Public License 2.0
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports:
+    httr,
+    stringi,
+    jsonlite
