@@ -33,12 +33,15 @@ oa_request <- function(query) {
   } else {
     # Set size of OpenAlex request that requires cursor paging
     large <- 10001
+    # Identify size of request
     size <- scanned_query$meta$count
-    cat('Attempting to pull', size, 'records from the OpenAlex API via', ifelse(size < large, 'basic paging', 'cursor paging'), '(200 records per page)',
+    cat('Attempting to pull', size, ifelse(size > 1, 'records', 'record'), 'from the OpenAlex API via', ifelse(size < large, 'basic paging', 'cursor paging'), '(200 records per page)',
         '\nLearn about the basic paging/cursor paging distinction here: https://docs.openalex.org/api/get-lists-of-entities#basic-paging-up-to-10-000-results\n')
     out <- list()
     pages_needed <- ceiling(size / 200)
     cat(paste0('Pages downloaded out of ', pages_needed, ': '))
+
+    # pb <- progress::progress_bar$new('OpexAlex API query progress: [:bar] ETA: :eta', total = ceiling(pages_needed)/100, clear = F)
 
     # Pull records via basic paging if `size` is 10k or less; pull via cursor paging if `size` is larger than 10k
     if (size < large) {
@@ -46,7 +49,7 @@ oa_request <- function(query) {
         cat(i, '..')
         query_paged <- paste0(query, '&page=', i)
         a_page <- httr::GET(query_paged, user)
-        if (httr::status_code(a_page) != 200) {stop(paste0('OpenAlex API request failed on page ', i, '; ', 'status code: ', httr::status_code(a_page)), call. = F)}
+        if (httr::status_code(a_page) != 200) {stop(paste0('OpenAlex API request failed on page ', i, ' of ', pages_needed, '; ', 'status code: ', httr::status_code(a_page)), call. = F)}
         a_page_parsed <- jsonlite::fromJSON(httr::content(a_page, as = 'text', encoding = 'utf-8'), simplifyVector = F)
         out <- append(out, list(a_page_parsed$results))
       }
@@ -55,13 +58,19 @@ oa_request <- function(query) {
         cat(paste0(i, '... '))
         if (i == 1) {query_paged <- paste0(query, '&cursor=*')}
         a_page <- httr::GET(query_paged, user)
-        if (httr::status_code(a_page) != 200) {stop(paste0('OpenAlex API request failed on page ', i, '; ', 'status code: ', httr::status_code(a_page)), call. = F)}
+        if (httr::status_code(a_page) != 200) {stop(paste0('OpenAlex API request failed on page ', i, ' of ', pages_needed, '; ', 'status code: ', httr::status_code(a_page)), call. = F)}
         a_page_parsed <- jsonlite::fromJSON(httr::content(a_page, as = 'text', encoding = 'utf-8'), simplifyVector = F)
         out <- append(out, list(a_page_parsed$results))
         query_paged <- paste0(query, '&cursor=', a_page_parsed$meta$next_cursor)
       }
     }
+
+    # Output of API call is list of pages (200 records/page); un-peel list by one layer and combine individual records into single list
+    to_return <- list()
+    to_return <- lapply(out, function(x) append(to_return, x))
+
+    # Return
     cat('\n')
-    out
+    to_return
   }
 }
