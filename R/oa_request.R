@@ -31,6 +31,7 @@ oa_request <- function(query, use_fast_api_pool = T) {
 
   # If meta field is null, return results as is (e.g., for single-result request); otherwise, download as appropriate given size of request
   if(is.null(scanned_query$meta)) {
+    scanned_query <- list(scanned_query)
     return(scanned_query)
   } else {
     # Set size of OpenAlex request that requires cursor paging
