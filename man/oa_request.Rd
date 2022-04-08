@@ -4,10 +4,12 @@
 \alias{oa_request}
 \title{oa_request}
 \usage{
-oa_request(query)
+oa_request(query, use_fast_api_pool = T)
 }
 \arguments{
 \item{query}{A single URL string beginning with "http(s)://api.openalex.org"}
+
+\item{use_fast_api_pool}{Logical value indicating whether to make OpenAlex API call to polite pool (faster) or common pool (slower)}
 }
 \value{
 A list containing the API call results

@@ -5,6 +5,7 @@
 #' (Details forthcoming.)
 #'
 #' @param query A single URL string beginning with "http(s)://api.openalex.org"
+#' @param use_fast_api_pool Logical value indicating whether to make OpenAlex API call to polite pool (faster) or common pool (slower)
 #'
 #' @return A list containing the API call results
 #'
@@ -19,6 +20,7 @@ oa_request <- function(query, use_fast_api_pool = T) {
   if (stringi::stri_detect(query, regex = '&per-page=\\d+') == F) {query <- paste0(query, '&per-page=200')}
   if (stringi::stri_extract(query, regex = '(?<=&per-page=)\\d+') != '200') {query <- stringi::stri_replace(query, regex = '(?<=&per-page=)\\d+', replacement = '200')}
   if (stringi::stri_detect(query, regex = '&cursor=\\*')) {query <- stringi::stri_replace(query, regex = '&cursor=\\*', replacement = '')}
+  if (!is.logical(use_fast_api_pool)) {stop('use_fast_api_pool must be logical')}
 
   # Make contact and check returned data format
   user <- httr::user_agent(ifelse(use_fast_api_pool == T, email_gen(), 'httr'))
@@ -65,7 +67,9 @@ oa_request <- function(query, use_fast_api_pool = T) {
 
     # Output of API call is list of pages (200 records/page); un-peel list by one layer and combine individual records into single list
     to_return <- list()
-    to_return <- lapply(returned_pages, function(x) append(to_return, x))
+    for (i in 1:length(returned_pages)) {
+      to_return <- append(to_return, returned_pages[[i]][1:length(returned_pages[[i]])])
+    }
 
     # Return
     cat('\n')
