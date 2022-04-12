@@ -9,18 +9,16 @@
 #'
 #' @return A list containing the data from the OpenAlex API on all works affiliated with UVA institutions
 #'
+#' @family OpenAlex
+#'
 #' @examples
-#' # uva_oa_request('uva_institutions.txt', all_data_one_list = T)
+#' \dontrun{uva_oa_request('uva_institutions.csv')}
 #'
 #' @export
 uva_oa_request <- function(id_file = 'uva_institutions.csv', all_data_one_list = T) {
-  if (id_file %in% dir('data') == F) {
-    stop(paste0('Ensure that ', id_file, ' is in data/ folder'), call. = F)
-  }
+  if (id_file %in% dir('data') == F) {stop(paste0('Ensure that ', id_file, ' is in data/ folder'), call. = F)}
   institutions <- utils::read.csv(paste0('data/', id_file), header = T)
-  if (all(c('id', 'institution') %in% colnames(institutions)) == F) {
-    stop('Variables `id` (OpenAlex ID) and `institution` must be in id_file', call. = F)
-  }
+  if (all(c('id', 'institution') %in% colnames(institutions)) == F) {stop('Variables `id` (OpenAlex ID) and `institution` must be in id_file', call. = F)}
   institutions$temp_query <- paste0('https://api.openalex.org/works?filter=institutions.id:', institutions$id)
 
   if (all_data_one_list == T) {
@@ -38,7 +36,6 @@ uva_oa_request <- function(id_file = 'uva_institutions.csv', all_data_one_list =
     names(uva_results) <- institutions$institution
   }
 
-  cat('Results retrieved for the following institutions: ', paste(institutions$institution, collapse = ','))
-
+  cat('Results retrieved for the following UVA-affiliated institutions: ', paste(institutions$institution, collapse = ','))
   uva_results
 }

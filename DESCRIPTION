@@ -13,3 +13,6 @@ Imports:
     httr,
     stringi,
     jsonlite
+Depends: 
+    R (>= 2.10)
+LazyData: true

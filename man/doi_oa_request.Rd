@@ -13,8 +13,21 @@ doi_oa_request(doi)
 A list containing the API call results
 }
 \description{
-Retrieve data from the OpenAlex API based on a DOI
+Retrieve data for a work from the OpenAlex API based on a DOI.
 }
 \details{
 (Details forthcoming.)
 }
+\examples{
+# https://doi.org/10.4324/9780203873366 and doi:10.4324/9780203873366 work as well
+doi <- '10.4324/9780203873366'
+results <- doi_oa_request(doi)
+
+}
+\seealso{
+Other OpenAlex: 
+\code{\link{name_search_oa_request}()},
+\code{\link{oa_request}()},
+\code{\link{uva_oa_request}()}
+}
+\concept{OpenAlex}

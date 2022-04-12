@@ -1,20 +1,23 @@
 #' oa_request
 #'
-#' Retrieve data from the OpenAlex API.
+#' Retrieve data from the OpenAlex API using a custom query.
 #'
 #' (Details forthcoming.)
 #'
 #' @param query A URL beginning with "http(s)://api.openalex.org"
 #' @param use_fast_api_pool Logical value indicating whether to make OpenAlex API call to polite pool (faster) or common pool (slower)
+#' @param remove_duplicates Check for and remove duplicate records at the end of the call
 #'
 #' @return A list containing the API call results
 #'
+#' @family OpenAlex
+#'
 #' @examples
-#' # query <- 'https://api.openalex.org/authors/A3184395717'
-#' # sagan_dat <- oa_request(query)
+#' query <- 'https://api.openalex.org/authors/A3184395717'
+#' sagan_dat <- oa_request(query)
 #'
 #' @export
-oa_request <- function(query, use_fast_api_pool = T) {
+oa_request <- function(query, use_fast_api_pool = T, remove_duplicates = T) {
   # Check structure of query and modify as needed
   query <- check_oa_query(query)
   if (!is.logical(use_fast_api_pool)) {stop('use_fast_api_pool must be logical')}
@@ -70,7 +73,7 @@ oa_request <- function(query, use_fast_api_pool = T) {
     }
 
     # Remove duplicates
-    to_return <- to_return[duplicated(to_return) == F]
+    if (remove_duplicates == T) {to_return <- to_return[duplicated(to_return) == F]}
 
     # Return
     cat('\n')

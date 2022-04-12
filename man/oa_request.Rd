@@ -4,24 +4,33 @@
 \alias{oa_request}
 \title{oa_request}
 \usage{
-oa_request(query, use_fast_api_pool = T)
+oa_request(query, use_fast_api_pool = T, remove_duplicates = T)
 }
 \arguments{
 \item{query}{A URL beginning with "http(s)://api.openalex.org"}
 
 \item{use_fast_api_pool}{Logical value indicating whether to make OpenAlex API call to polite pool (faster) or common pool (slower)}
+
+\item{remove_duplicates}{Check for and remove duplicate records at the end of the call}
 }
 \value{
 A list containing the API call results
 }
 \description{
-Retrieve data from the OpenAlex API.
+Retrieve data from the OpenAlex API using a custom query.
 }
 \details{
 (Details forthcoming.)
 }
 \examples{
-# query <- 'https://api.openalex.org/authors/A3184395717'
-# sagan_dat <- oa_request(query)
+query <- 'https://api.openalex.org/authors/A3184395717'
+sagan_dat <- oa_request(query)
 
 }
+\seealso{
+Other OpenAlex: 
+\code{\link{doi_oa_request}()},
+\code{\link{name_search_oa_request}()},
+\code{\link{uva_oa_request}()}
+}
+\concept{OpenAlex}
