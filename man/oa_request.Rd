@@ -7,7 +7,7 @@
 oa_request(query, use_fast_api_pool = T)
 }
 \arguments{
-\item{query}{A single URL string beginning with "http(s)://api.openalex.org"}
+\item{query}{A URL beginning with "http(s)://api.openalex.org"}
 
 \item{use_fast_api_pool}{Logical value indicating whether to make OpenAlex API call to polite pool (faster) or common pool (slower)}
 }

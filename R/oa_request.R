@@ -4,7 +4,7 @@
 #'
 #' (Details forthcoming.)
 #'
-#' @param query A single URL string beginning with "http(s)://api.openalex.org"
+#' @param query A URL beginning with "http(s)://api.openalex.org"
 #' @param use_fast_api_pool Logical value indicating whether to make OpenAlex API call to polite pool (faster) or common pool (slower)
 #'
 #' @return A list containing the API call results
