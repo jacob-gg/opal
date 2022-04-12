@@ -9,12 +9,15 @@
 #'
 #' @return A list containing the data from the OpenAlex API on all works affiliated with UVA institutions
 #'
+#' @examples
+#' # uva_oa_request('uva_institutions.txt', all_data_one_list = T)
+#'
 #' @export
-uva_oa_request <- function(id_file = 'uva_institutions.txt', all_data_one_list = T) {
+uva_oa_request <- function(id_file = 'uva_institutions.csv', all_data_one_list = T) {
   if (id_file %in% dir('data') == F) {
     stop(paste0('Ensure that ', id_file, ' is in data/ folder'), call. = F)
   }
-  institutions <- utils::read.csv('data/uva_institutions.txt', header = T)
+  institutions <- utils::read.csv(paste0('data/', id_file), header = T)
   if (all(c('id', 'institution') %in% colnames(institutions)) == F) {
     stop('Variables `id` (OpenAlex ID) and `institution` must be in id_file', call. = F)
   }

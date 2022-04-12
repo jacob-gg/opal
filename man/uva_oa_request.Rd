@@ -4,7 +4,7 @@
 \alias{uva_oa_request}
 \title{uva_oa_request}
 \usage{
-uva_oa_request(id_file = "uva_institutions.txt", all_data_one_list = T)
+uva_oa_request(id_file = "uva_institutions.csv", all_data_one_list = T)
 }
 \arguments{
 \item{id_file}{A string indicating the file name in the data/ folder containing OpenAlex IDs and names of UVA institutions}
@@ -12,11 +12,15 @@ uva_oa_request(id_file = "uva_institutions.txt", all_data_one_list = T)
 \item{all_data_one_list}{\code{T/F} indicating whether results for all UVA institutions should be collapsed into a single list or left separated by institution}
 }
 \value{
-A list containing the data from the OpenAlex API on all works associated with UVA institutions
+A list containing the data from the OpenAlex API on all works affiliated with UVA institutions
 }
 \description{
 Retrieve data for works affiliated with UVA institutions from the OpenAlex API.
 }
 \details{
 (Details forthcoming.)
+}
+\examples{
+# uva_oa_request('uva_institutions.txt', all_data_one_list = T)
+
 }
