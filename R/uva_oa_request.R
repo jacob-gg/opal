@@ -7,7 +7,7 @@
 #' @param id_file A string indicating the file name in the data/ folder containing OpenAlex IDs and names of UVA institutions
 #' @param all_data_one_list `T/F` indicating whether results for all UVA institutions should be collapsed into a single list or left separated by institution
 #'
-#' @return A list containing the data from the OpenAlex API on all works associated with UVA institutions
+#' @return A list containing the data from the OpenAlex API on all works affiliated with UVA institutions
 #'
 #' @export
 uva_oa_request <- function(id_file = 'uva_institutions.txt', all_data_one_list = T) {

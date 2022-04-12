@@ -15,11 +15,8 @@
 #'
 #' @export
 oa_request <- function(query, use_fast_api_pool = T) {
-  # Check and format query
-  if (stringi::stri_detect(query, regex = '^https?://api\\.openalex\\.org') == F) {stop('`query` argument must begin with `http(s)://api.openalex.org`', call. = F)}
-  if (stringi::stri_detect(query, regex = '&per-page=\\d+') == F) {query <- paste0(query, '&per-page=200')}
-  if (stringi::stri_extract(query, regex = '(?<=&per-page=)\\d+') != '200') {query <- stringi::stri_replace(query, regex = '(?<=&per-page=)\\d+', replacement = '200')}
-  if (stringi::stri_detect(query, regex = '&cursor=\\*')) {query <- stringi::stri_replace(query, regex = '&cursor=\\*', replacement = '')}
+  # Check structure of query and modify as needed
+  query <- check_oa_query(query)
   if (!is.logical(use_fast_api_pool)) {stop('use_fast_api_pool must be logical')}
 
   # Make contact and check returned data format
