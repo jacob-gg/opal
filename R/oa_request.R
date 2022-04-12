@@ -72,6 +72,9 @@ oa_request <- function(query, use_fast_api_pool = T) {
       to_return <- append(to_return, returned_pages[[i]][1:length(returned_pages[[i]])])
     }
 
+    # Remove duplicates
+    to_return <- to_return[duplicated(to_return) == F]
+
     # Return
     cat('\n')
     to_return
