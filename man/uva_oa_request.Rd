@@ -4,7 +4,7 @@
 \alias{uva_oa_request}
 \title{uva_oa_request}
 \usage{
-uva_oa_request(id_file = "uva_institutions.csv", all_data_one_list = T)
+uva_oa_request(id_file = "uva_institutions.rda", all_data_one_list = T)
 }
 \arguments{
 \item{id_file}{A string indicating the file name in the data/ folder containing OpenAlex IDs and names of UVA institutions}
@@ -21,7 +21,7 @@ Retrieve data for works affiliated with UVA institutions from the OpenAlex API.
 (Details forthcoming.)
 }
 \examples{
-\dontrun{uva_oa_request('uva_institutions.csv')}
+\dontrun{uva_oa_request()}
 
 }
 \seealso{

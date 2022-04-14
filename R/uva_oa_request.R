@@ -12,30 +12,30 @@
 #' @family OpenAlex
 #'
 #' @examples
-#' \dontrun{uva_oa_request('uva_institutions.csv')}
+#' \dontrun{uva_oa_request()}
 #'
 #' @export
-uva_oa_request <- function(id_file = 'uva_institutions.csv', all_data_one_list = T) {
+uva_oa_request <- function(id_file = 'uva_institutions.rda', all_data_one_list = T) {
   if (id_file %in% dir('data') == F) {stop(paste0('Ensure that ', id_file, ' is in data/ folder'), call. = F)}
-  institutions <- utils::read.csv(paste0('data/', id_file), header = T)
-  if (all(c('id', 'institution') %in% colnames(institutions)) == F) {stop('Variables `id` (OpenAlex ID) and `institution` must be in id_file', call. = F)}
-  institutions$temp_query <- paste0('https://api.openalex.org/works?filter=institutions.id:', institutions$id)
+  load('data/uva_institutions.rda')
+  if (all(c('id', 'institution') %in% colnames(uva_institutions)) == F) {stop('Variables `id` (OpenAlex ID) and `institution` must be in id_file', call. = F)}
+  uva_institutions$temp_query <- paste0('https://api.openalex.org/works?filter=institutions.id:', uva_institutions$id)
 
   if (all_data_one_list == T) {
     uva_results <- list()
-    for (i in 1:nrow(institutions)) {
-      temp <- oa_request(institutions$temp_query[i])
+    for (i in 1:nrow(uva_institutions)) {
+      temp <- oa_request(uva_institutions$temp_query[i])
       uva_results <- append(uva_results, temp)
     }
   } else {
     uva_results <- list()
-    for (i in 1:nrow(institutions)) {
-      temp <- oa_request(institutions$temp_query[i])
+    for (i in 1:nrow(uva_institutions)) {
+      temp <- oa_request(uva_institutions$temp_query[i])
       uva_results[[i]] <- temp
     }
-    names(uva_results) <- institutions$institution
+    names(uva_results) <- uva_institutions$institution
   }
 
-  cat('Results retrieved for the following UVA-affiliated institutions: ', paste(institutions$institution, collapse = ','))
+  cat('Results retrieved for the following UVA-affiliated institutions: ', paste(uva_institutions$institution, collapse = ','))
   uva_results
 }
