@@ -4,10 +4,12 @@
 \alias{doi_oa_request}
 \title{doi_oa_request}
 \usage{
-doi_oa_request(doi)
+doi_oa_request(doi, ...)
 }
 \arguments{
 \item{doi}{A DOI}
+
+\item{...}{Additional arguments to be passed to \code{oa_request()} (e.g., verbose = \code{T}/\code{F})}
 }
 \value{
 A list containing the API call results

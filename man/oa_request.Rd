@@ -4,7 +4,7 @@
 \alias{oa_request}
 \title{oa_request}
 \usage{
-oa_request(query, use_fast_api_pool = T, remove_duplicates = T)
+oa_request(query, use_fast_api_pool = T, remove_duplicates = T, verbose = T)
 }
 \arguments{
 \item{query}{A URL beginning with "http(s)://api.openalex.org"}
@@ -12,6 +12,8 @@ oa_request(query, use_fast_api_pool = T, remove_duplicates = T)
 \item{use_fast_api_pool}{Logical value indicating whether to make OpenAlex API call to polite pool (faster) or common pool (slower)}
 
 \item{remove_duplicates}{Check for and remove duplicate records at the end of the call}
+
+\item{verbose}{Print API call details to the console}
 }
 \value{
 A list containing the API call results

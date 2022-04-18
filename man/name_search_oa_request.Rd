@@ -4,13 +4,15 @@
 \alias{name_search_oa_request}
 \title{name_search_oa_request}
 \usage{
-name_search_oa_request(name)
+name_search_oa_request(name, ...)
 }
 \arguments{
 \item{name}{A search string (e.g., "sagan"; "hadley wickham")}
+
+\item{...}{Additional arguments to be passed to \code{oa_request()} (e.g., \code{verbose = F})}
 }
 \value{
-A list containing the API call results; each element of the outermost list contains data for the works associated with one matched author (some searchers return >1 author)
+A list containing the API call results; each element of the outermost list contains data for the works associated with one matched author (some searches return >1 author)
 }
 \description{
 Retrieve data from the OpenAlex API for works with authors matching a search string.

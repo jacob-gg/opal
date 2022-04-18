@@ -21,6 +21,7 @@ uva_oa_request <- function(id_file = 'uva_institutions.rda', all_data_one_list =
   if (all(c('id', 'institution') %in% colnames(uva_institutions)) == F) {stop('Variables `id` (OpenAlex ID) and `institution` must be in id_file', call. = F)}
   uva_institutions$temp_query <- paste0('https://api.openalex.org/works?filter=institutions.id:', uva_institutions$id)
 
+  # \----------------------------- Vectorize this -----------------------------/
   if (all_data_one_list == T) {
     uva_results <- list()
     for (i in 1:nrow(uva_institutions)) {
