@@ -86,9 +86,3 @@ oa_request <- function(query, use_fast_api_pool = T, remove_duplicates = T, verb
     to_return
   }
 }
-
-# Note: Partway through some large (>10k records) calls, the `next_cursor` value suddenly becomes null, despite there being more entries to come
-#   (e.g., to see example, drop cat('\n... ', length(a_page_parsed$results), ' ... ', a_page_parsed$meta$next_cursor, '... \n') in the cursor paging loop)
-# during a call to https://api.openalex.org/authors?filter=display_name.search:marks&per-page=200&cursor=*
-# After that point, we just return the first page (&cursor=*) over and over until page = pages_needed
-# Will contact OpenAlex folks to see if they have input
