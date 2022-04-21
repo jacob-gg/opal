@@ -32,7 +32,6 @@ sagan_dat <- oa_request(query)
 \seealso{
 Other OpenAlex: 
 \code{\link{doi_oa_request}()},
-\code{\link{name_search_oa_request}()},
 \code{\link{uva_oa_request}()}
 }
 \concept{OpenAlex}

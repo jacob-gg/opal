@@ -28,7 +28,6 @@ results <- doi_oa_request(doi)
 }
 \seealso{
 Other OpenAlex: 
-\code{\link{name_search_oa_request}()},
 \code{\link{oa_request}()},
 \code{\link{uva_oa_request}()}
 }

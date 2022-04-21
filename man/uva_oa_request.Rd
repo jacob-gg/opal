@@ -27,7 +27,6 @@ Retrieve data for works affiliated with UVA institutions from the OpenAlex API.
 \seealso{
 Other OpenAlex: 
 \code{\link{doi_oa_request}()},
-\code{\link{name_search_oa_request}()},
 \code{\link{oa_request}()}
 }
 \concept{OpenAlex}

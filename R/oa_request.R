@@ -40,7 +40,7 @@ oa_request <- function(query, use_fast_api_pool = T, remove_duplicates = T, verb
     # Identify size of request
     size <- scanned_query$meta$count
     if (verbose == T) {
-      cat('Attempting to pull', size, ifelse(size > 1, 'records', 'record'), 'from the OpenAlex API via', ifelse(size < large, 'basic paging', 'cursor paging'), '(200 records per page)',
+      cat('Attempting to pull', size, ifelse(size != 1, 'records', 'record'), 'from the OpenAlex API via', ifelse(size < large, 'basic paging', 'cursor paging'), '(200 records per page)',
           '\nDetails on the basic paging/cursor paging distinction are here: https://docs.openalex.org/api/get-lists-of-entities#basic-paging-up-to-10-000-results',
           '\nAPI pool:', init_query$headers$`x-api-pool`, paste0('(', ifelse(init_query$headers$`x-api-pool` == 'polite', 'faster', 'slower'),')\n'))
     }
