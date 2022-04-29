@@ -7,7 +7,7 @@
 doi_oa_request(doi, ...)
 }
 \arguments{
-\item{doi}{A DOI}
+\item{doi}{A DOI (string)}
 
 \item{...}{Additional arguments to be passed to \code{oa_request()} (e.g., verbose = \code{T}/\code{F})}
 }

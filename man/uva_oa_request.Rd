@@ -4,12 +4,10 @@
 \alias{uva_oa_request}
 \title{uva_oa_request}
 \usage{
-uva_oa_request(id_file = "uva_institutions.rda", all_data_one_list = T)
+uva_oa_request(...)
 }
 \arguments{
-\item{id_file}{A string indicating the file name in the data/ folder containing OpenAlex IDs and names of UVA institutions}
-
-\item{all_data_one_list}{\code{T/F} indicating whether results for all UVA institutions should be collapsed into a single list or left separated by institution}
+\item{...}{Additional arguments to be passed to \code{oa_request()} (e.g., verbose = \code{T}/\code{F})}
 }
 \value{
 A list containing the data from the OpenAlex API on all works affiliated with UVA institutions
