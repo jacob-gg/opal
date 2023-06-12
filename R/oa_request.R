@@ -8,6 +8,7 @@
 #' @param use_fast_api_pool Logical value indicating whether to call to the OpenAlex API polite pool (faster) or common pool (slower)
 #' @param remove_duplicates Logical value indicating whether to check for and remove duplicate records at the end of the call
 #' @param verbose Logical value indicating whether to print API call details to the console
+#' @param return_one_pg Logical value indicating whether to only return one page of results from the API (for testing and debugging purposes)
 #'
 #' @return A list containing the API call results
 #'
@@ -18,7 +19,7 @@
 #' sagan_dat <- oa_request(query)
 #'
 #' @export
-oa_request <- function(query, use_fast_api_pool = T, remove_duplicates = T, verbose = T) {
+oa_request <- function(query, use_fast_api_pool = T, remove_duplicates = T, verbose = T, return_one_pg = F) {
   # Check structure of query and modify as needed
   query <- check_oa_query(query)
   if (all(c(use_fast_api_pool, remove_duplicates, verbose) %in% c(T, F)) == F) {stop('use_fast_api_pool, remove_duplicates, and verbose must all be T(RUE) or F(ALSE)')}
@@ -39,7 +40,7 @@ oa_request <- function(query, use_fast_api_pool = T, remove_duplicates = T, verb
   # Download data as appropriate given query_size
   large_request <- 10001
   query_size <- scanned_query$meta$count
-  pages_needed <- ceiling(query_size / scanned_query$meta$per_page)
+  pages_needed <- ifelse(return_one_pg == TRUE, 1, ceiling(query_size / scanned_query$meta$per_page))
   returned_pages <- vector(mode = 'list', length = pages_needed)
 
   if (verbose == T) {cat('Attempting to pull', query_size, ifelse(query_size != 1, 'records', 'record'), 'from the OpenAlex API via',

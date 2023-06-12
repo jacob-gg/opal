@@ -8,7 +8,7 @@ Description: opal contains functions for interacting with the OpenAlex API.
 License: Mozilla Public License 2.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.2
 Imports:
     httr,
     stringi,

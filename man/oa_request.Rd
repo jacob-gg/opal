@@ -4,7 +4,13 @@
 \alias{oa_request}
 \title{oa_request}
 \usage{
-oa_request(query, use_fast_api_pool = T, remove_duplicates = T, verbose = T)
+oa_request(
+  query,
+  use_fast_api_pool = T,
+  remove_duplicates = T,
+  verbose = T,
+  return_one_pg = F
+)
 }
 \arguments{
 \item{query}{A URL (string) beginning with "http(s)://api.openalex.org"}
@@ -14,6 +20,8 @@ oa_request(query, use_fast_api_pool = T, remove_duplicates = T, verbose = T)
 \item{remove_duplicates}{Logical value indicating whether to check for and remove duplicate records at the end of the call}
 
 \item{verbose}{Logical value indicating whether to print API call details to the console}
+
+\item{return_one_pg}{Logical value indicating whether to only return one page of results from the API (for testing and debugging purposes)}
 }
 \value{
 A list containing the API call results
