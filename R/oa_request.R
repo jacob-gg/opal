@@ -2,7 +2,7 @@
 #'
 #' Retrieve data from the OpenAlex API using a custom query.
 #'
-#' (Details forthcoming.)
+#' (Additional details forthcoming.)
 #'
 #' @param query A URL (string) beginning with "http(s)://api.openalex.org"
 #' @param use_fast_api_pool Logical value indicating whether to call to the OpenAlex API polite pool (faster) or common pool (slower)
@@ -15,7 +15,7 @@
 #' @family OpenAlex
 #'
 #' @examples
-#' query <- 'https://api.openalex.org/authors/A3184395717'
+#' query <- 'https://api.openalex.org/authors/A5069290754'
 #' sagan_dat <- oa_request(query)
 #'
 #' @export

@@ -30,10 +30,10 @@ A list containing the API call results
 Retrieve data from the OpenAlex API using a custom query.
 }
 \details{
-(Details forthcoming.)
+(Additional details forthcoming.)
 }
 \examples{
-query <- 'https://api.openalex.org/authors/A3184395717'
+query <- 'https://api.openalex.org/authors/A5069290754'
 sagan_dat <- oa_request(query)
 
 }
