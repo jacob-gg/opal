@@ -9,7 +9,8 @@ oa_request(
   use_fast_api_pool = T,
   remove_duplicates = T,
   verbose = T,
-  return_one_pg = F
+  return_one_pg = F,
+  api_key = NULL
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ oa_request(
 \item{verbose}{Logical value indicating whether to print API call details to the console}
 
 \item{return_one_pg}{Logical value indicating whether to only return one page of results from the API (for testing and debugging purposes)}
+
+\item{api_key}{API key to use in the request, if using OpenAlex Premium}
 }
 \value{
 A list containing the API call results

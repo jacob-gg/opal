@@ -9,6 +9,7 @@
 #' @param remove_duplicates Logical value indicating whether to check for and remove duplicate records at the end of the call
 #' @param verbose Logical value indicating whether to print API call details to the console
 #' @param return_one_pg Logical value indicating whether to only return one page of results from the API (for testing and debugging purposes)
+#' @param api_key API key to use in the request, if using OpenAlex Premium
 #'
 #' @return A list containing the API call results
 #'
@@ -19,9 +20,13 @@
 #' sagan_dat <- oa_request(query)
 #'
 #' @export
-oa_request <- function(query, use_fast_api_pool = T, remove_duplicates = T, verbose = T, return_one_pg = F) {
+oa_request <- function(query, use_fast_api_pool = T, remove_duplicates = T, verbose = T, return_one_pg = F, api_key = NULL) {
   # Check structure of query and modify as needed
   query <- check_oa_query(query)
+  if (!is.null(api_key)) {
+    query <- paste0(query, '&api_key=', api_key)
+  }
+
   if (all(c(use_fast_api_pool, remove_duplicates, verbose) %in% c(T, F)) == F) {stop('use_fast_api_pool, remove_duplicates, and verbose must all be T(RUE) or F(ALSE)')}
 
   # Make contact and check returned data format
